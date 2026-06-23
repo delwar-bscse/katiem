@@ -3,14 +3,19 @@ import { myFetch } from '@/utils/myFetch';
 import React, { useEffect } from 'react'
 import { toast } from 'sonner';
 
+import dayjs from 'dayjs';
+
 const SubscriptionInfo = () => {
   const [myPackage, setMyPackage] = React.useState<any>(null);
   // const [subscription, setSubscription] = React.useState<any>(null);
 
+
+
   const fetchSubscribe = async () => {
     const res = await myFetch("/subscription/my-subscription")
-    console.log("My Subscribe Response : ", res)
+    // console.log("My Subscribe Response : ", res)
     if (res.success) {
+      // console.log("My Subscribe Data : ", res?.data)
       setMyPackage(res?.data);
       // setSubscription(res?.data?.subscription);
     } else {
@@ -58,10 +63,15 @@ const SubscriptionInfo = () => {
               <li key={index} className='text-gray-600'>{feature}</li>
             ))}
           </ul>
-          <div className='flex items-center justify-center px-4 py-10'>
+          <div className='flex flex-col items-center justify-center px-4 py-10 gap-2'>
             <button onClick={cancelSubscribe} type='button' disabled={myPackage?.cancelAtPeriodEnd} className={`w-full mt-auto bg-red-500 text-white font-semibold px-6 py-2 rounded-lg ${myPackage?.cancelAtPeriodEnd ? 'opacity-80 cursor-not-allowed' : 'hover:bg-red-600 cursor-pointer'} transition-colors duration-300`}>
               {myPackage?.cancelAtPeriodEnd ? "Subscription Cancelled" : "Cancel Subscription"}
             </button>
+            {myPackage?.cancelAtPeriodEnd && (
+              <p className='text-xs text-red-500 mt-2 text-center font-medium'>
+                You have already cancelled this package. This package will be expired at {myPackage?.currentPeriodEnd ? dayjs(myPackage.currentPeriodEnd * 1000).format("DD, MMMM YYYY") : ''}.
+              </p>
+            )}
           </div>
         </div>
         <div className='hidden md:block h-full w-px bg-gray-200 ' />

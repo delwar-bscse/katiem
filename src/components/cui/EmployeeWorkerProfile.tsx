@@ -107,9 +107,9 @@ const EmployeeWorkerProfile = () => {
   }
 
   return (
-    <div className="w-full max-w-[400px]">
-      {!isEditMode && <div className="border rounded-md shadow p-4">
-        <div className="space-y-3">
+    <div className="w-full max-w-2xl">
+      {!isEditMode && <div className="border rounded-md shadow p-6">
+        <div className="space-y-4">
           {userProfile?.name && <p className="text-gray-600"><span className="font-semibold w-40 inline-block">{`${isEmployer ? "Employer" : "Worker"} Name`}</span>: {userProfile?.name}</p>}
           <p className="text-gray-600"><span className="font-semibold w-40 inline-block">Email</span>: {userProfile?.email}</p>
           <p className="text-gray-600"><span className="font-semibold w-40 inline-block">Contact</span>: {userProfile?.phone}</p>
@@ -117,8 +117,8 @@ const EmployeeWorkerProfile = () => {
           <p className="text-gray-600 capitalize"><span className="font-semibold w-40 inline-block">Role</span>: {userProfile?.role}</p>
         </div>
         {/* Submit Button */}
-        <div className="mt-2">
-          <Button onClick={() => setIsEditMode(true)} variant="yelloBtn" type="button" size="lg" className="w-full mt-4">
+        <div className="mt-4">
+          <Button onClick={() => setIsEditMode(true)} variant="yelloBtn" type="button" size="lg" className="w-full sm:w-fit sm:px-10 mt-4">
             Edit Profile
           </Button>
         </div>
@@ -126,9 +126,9 @@ const EmployeeWorkerProfile = () => {
 
 
 
-      {isEditMode && <div className="border rounded-md shadow p-4">
+      {isEditMode && <div className="border rounded-md shadow p-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
             {/* Name */}
             <FormField
@@ -197,7 +197,7 @@ const EmployeeWorkerProfile = () => {
             />
 
             {/* Submit Button */}
-            <Button variant="yelloBtn" type="submit" size="lg" className="w-full mt-4">
+            <Button variant="yelloBtn" type="submit" size="lg" className="w-full sm:w-fit sm:px-10 mt-4">
               Save
             </Button>
           </form>

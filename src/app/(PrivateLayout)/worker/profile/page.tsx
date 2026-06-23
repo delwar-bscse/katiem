@@ -20,9 +20,9 @@ const Profile = async () => {
     <div className='pb-20'>
       {/* ------------------- Profile & Cover ------------------- */}
       <div className='maxWidth relative'>
-        <Image src={formatUrl(workerDetails?.cover ?? "")} width={1200} height={300} alt={workerDetails?.name} className='w-full sm:h-50 md:h-75 object-fit' />
+        <Image src={formatUrl(workerDetails?.cover ?? "")} width={1200} height={300} alt={workerDetails?.name || "Worker Cover Image"} className='w-full sm:h-50 md:h-75 object-fit' />
         <div className='absolute bottom-0 left-6 md:left-16 rounded-full transform translate-y-1/2'>
-          <Image src={formatUrl(workerDetails?.profile ?? "")} width={400} height={400} alt={workerDetails?.name} className='w-25 h-25 md:w-50 md:h-50 rounded-full' />
+          <Image src={formatUrl(workerDetails?.profile ?? "")} width={400} height={400} alt={workerDetails?.name || "Worker Profile Image"} className='w-25 h-25 md:w-50 md:h-50 rounded-full' />
         </div>
       </div>
       <div className='maxWidth flex items-center justify-end gap-2 md:gap-4 pt-2 md:pt-4'>

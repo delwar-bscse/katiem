@@ -26,8 +26,16 @@ const Navbar = ({ userData }: { userData: any }) => {
   const [navbarItems, setNavbarItems] = useState(navbarItemsAll);
   const [dropdownItems, setDropdownItems] = useState(workerMenus);
 
+  // Fix hydration mismatch states
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [role, setRole] = useState<string | null>(null);
+
   // Fix hydration mismatch: check role only on client
   useEffect(() => {
+    setMounted(true);
+    const activeRole = getUserRole() || null;
+    setRole(activeRole);
+
     if (getUserRoleEmployer()) {
       setNavbarItems(navbarItemsEmployer);
       setDropdownItems(employerMenus);
@@ -91,7 +99,7 @@ const Navbar = ({ userData }: { userData: any }) => {
 
         {/* Log in / Mobile Menu Trigger */}
         <div className=" flex justify-end items-center gap-4 relative">
-          {getUserRole() && (
+          {mounted && role && (
             <Link
               href="/notifications"
               className="w-9 h-9 md:w-12 md:h-12 rounded-full  bg-gray-200 flex items-center justify-center relative"
@@ -104,7 +112,7 @@ const Navbar = ({ userData }: { userData: any }) => {
               )}
             </Link>
           )}
-          {getUserRole() ? (
+          {mounted && role ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <div className="flex items-center gap-2 cursor-pointer">
@@ -208,7 +216,7 @@ const Navbar = ({ userData }: { userData: any }) => {
 
                   {/* Sign Up / Log In and Log Out Button */}
                   <div className="py-6 flex items-center justify-center">
-                    {!getUserRole() ? (
+                    {!mounted || !role ? (
                       <div className="flex items-center justify-center gap-1 border-2 border-brandClr2 text-brandClr1 font-semibold py-1 px-4 rounded-full customShadow4 ">
                         <Link href="/signup" className="text-sm">
                           Sign Up

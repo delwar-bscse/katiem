@@ -93,7 +93,7 @@ const EmployeeProfile = () => {
           <div className='bg-[#FFECAC] h-20 sm:h-28 md:h-40 w-full' />
 
           <div className='absolute bottom-0 left-6 md:left-16 rounded-full transform translate-y-1/2 bg-white/50'>
-            <Image src={profileImage ?? formatUrl(userProfile?.profile)} width={320} height={320} alt={userProfile?.name} className='w-25 h-25 md:w-40 md:h-40 rounded-full' />
+            <Image src={profileImage ?? formatUrl(userProfile?.profile)} width={320} height={320} alt={userProfile?.name || "Profile Image"} className='w-25 h-25 md:w-40 md:h-40 rounded-full' />
 
             <div onClick={() => document.getElementById("profileImageId")?.click()} className='w-6 h-6 md:w-8 md:h-8 rounded-full border bg-gray-500/50 flex items-center justify-center absolute bottom-4 md:bottom-10 -right-2 md:-right-4 transform -translate-x-1/2 translate-y-1/2'>
               <IoCameraOutline className='text-white text-lg md:text-xl' />
@@ -104,35 +104,47 @@ const EmployeeProfile = () => {
         <div className='h-5 md:h-20' />
       </div>
 
-      {/* ------------------- Settings Sidebar ------------------- */}
-      <div className='maxWidth flex flex-col gap-8 py-8'>
-        <div>
-          <ul className='flex flex-row flex-wrap justify-start gap-4'>
+      {/* ------------------- Settings Sidebar & Content ------------------- */}
+      <div className='maxWidth flex flex-col md:flex-row gap-6 md:gap-8 py-8 items-start'>
+        {/* Left Sidebar */}
+        <div className='w-full md:w-1/4 bg-white rounded-lg border border-gray-100 p-4 shadow-sm md:sticky md:top-24'>
+          <ul className='flex flex-col gap-2'>
             {profileSidebar?.map((item) => (
-              <li onClick={() => setStep(item.id)} key={item.id} className={`flex items-center gap-2 py-2 cursor-pointer  hover:bg-[#FFECAC] rounded-sm px-4 shadow ${item.id === step ? "bg-[#FFECAC]" : "bg-white"}`}>
-                <span>
+              <li 
+                onClick={() => setStep(item.id)} 
+                key={item.id} 
+                className={`flex items-center gap-2.5 py-2.5 px-4 cursor-pointer rounded-md transition-all duration-200 ${
+                  item.id === step 
+                    ? "bg-[#FFECAC] text-gray-900 font-semibold shadow-sm" 
+                    : "bg-white hover:bg-[#FFECAC]/30 text-gray-600"
+                }`}
+              >
+                <span className='text-xl'>
                   {item.icon}
                 </span>
-                <span className='text-lg font-semibold text-gray-600 hidden md:block'>{item.title}</span>
+                <span className='text-base font-semibold'>{item.title}</span>
               </li>
             ))}
-            <li onClick={handleLogout} className={`flex items-center gap-2 py-2 cursor-pointer  hover:bg-[#FFECAC] rounded-sm px-4 shadow bg-white`}>
+            <li 
+              onClick={handleLogout} 
+              className={`flex items-center gap-2.5 py-2.5 px-4 cursor-pointer rounded-md transition-all duration-200 bg-white hover:bg-red-50 text-red-600 mt-4 border-t border-gray-100 pt-4`}
+            >
               <span>
-                <MdOutlineLogout className='text-gray-700 text-xl' />
+                <MdOutlineLogout className='text-red-600 text-xl' />
               </span>
-              <span className='text-lg font-semibold text-gray-600 hidden md:block'>Log Out</span>
+              <span className='text-base font-semibold'>Log Out</span>
             </li>
           </ul>
         </div>
 
-        <div className='w-full'>
+        {/* Right Content Area */}
+        <div className='w-full md:w-3/4 bg-white rounded-lg border border-gray-100 p-4 md:p-6 shadow-sm min-h-[400px]'>
           {step === 1 && <EmployeeWorkerProfile />}
           {step === 2 && <NidUploadEmployer />}
           {step === 3 && <SubscriptionInfo />}
           {step === 4 && <ChangePassword />}
           {step === 5 && <DeleteAccount />}
         </div>
-
       </div>
     </div>
   )

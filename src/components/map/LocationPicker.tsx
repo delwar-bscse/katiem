@@ -44,8 +44,8 @@ export default function LocationPicker({ locations }: { locations: { lat: number
           {/* {markerPosition && <Marker position={markerPosition} />} */}
 
           {/* For multiple markers */}
-          {locations.map(({ lat, lng }) => (
-            <Marker key={`${lat}-${lng}`} position={{ lat, lng }} />
+          {locations.map(({ lat, lng }, index) => (
+            <Marker key={`${lat}-${lng}-${index}`} position={{ lat, lng }} />
           ))}
 
           {/* Radius circle */}
