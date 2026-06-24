@@ -292,9 +292,9 @@ const SignUp = () => {
               </Button>
 
               <div className="relative -top-2 flex justify-center items-center gap-2">
-                Already have an account !
-                <Link href="/login" className="text-yellow-500 hover:text-gray-600 font-semibold">
-                  Login
+                Already Have An Account?
+                <Link href="/login" className="text-yellow-500 underline hover:text-gray-600 font-semibold">
+                  Login Now
                 </Link>
               </div>
             </form>

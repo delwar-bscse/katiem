@@ -146,9 +146,9 @@ const SignIn = () => {
           </Button>
 
           <div className="relative -top-2 flex justify-center items-center gap-2">
-            don&quot;t have an account !
-            <Link href="/signup" className="text-yellow-500 hover:text-gray-600 font-semibold">
-              sign up
+            Don&apos;t Have An Account?
+            <Link href="/signup" className="text-yellow-500 underline hover:text-gray-600 font-semibold">
+              Sign Up Now
             </Link>
           </div>
         </form>

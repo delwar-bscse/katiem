@@ -155,91 +155,93 @@ const Navbar = ({ userData }: { userData: any }) => {
 
           {/* Mobile Menu */}
           <div className="lg:hidden">
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild className="cursor-pointer">
-                <Menu className="w-6 h-6 text-gray-600" />
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64">
-                <SheetHeader className="flex flex-row items-center justify-between pt-8">
-                  <SheetTitle className="">
-                    <Image
-                      src={brandLogo}
-                      alt="Brand Logo"
-                      width={300}
-                      height={75}
-                      className="w-30 h-12 object-fit"
-                    />
-                  </SheetTitle>
-                  <SheetClose>
-                    <IoClose
-                      size={30}
-                      className="text-gray-600 hover:text-gray-800 cursor-pointer"
-                    />
-                  </SheetClose>
-                </SheetHeader>
+            {mounted && (
+              <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger asChild className="cursor-pointer">
+                  <Menu className="w-6 h-6 text-gray-600" />
+                </SheetTrigger>
+                <SheetContent side="left" className="w-64">
+                  <SheetHeader className="flex flex-row items-center justify-between pt-8">
+                    <SheetTitle className="">
+                      <Image
+                        src={brandLogo}
+                        alt="Brand Logo"
+                        width={300}
+                        height={75}
+                        className="w-30 h-12 object-fit"
+                      />
+                    </SheetTitle>
+                    <SheetClose>
+                      <IoClose
+                        size={30}
+                        className="text-gray-600 hover:text-gray-800 cursor-pointer"
+                      />
+                    </SheetClose>
+                  </SheetHeader>
 
-                <ul className="flex flex-col mt-6 gap-2 font-medium text-gray-700 px-2">
-                  {user && (
-                    <li
-                      onClick={() => setOpen(false)}
-                      className="cursor-pointer hover:bg-gray-100 py-2 rounded"
-                    >
-                      <Link href="/profile" className="flex gap-2 items-center">
-                        <span className="w-12 h-12 block rounded-full overflow-hidden border-2 border-primary">
-                          <Image
-                            src={user ? formatUrl(user?.profile) : profileImg}
-                            alt="User Profile"
-                            width={100}
-                            height={100}
-                            className="object-cover h-12 w-12"
-                          />
-                        </span>
-                        <span className="flex flex-col text-gray-600 text-sm">
-                          {user?.name}
-                        </span>
-                      </Link>
-                    </li>
-                  )}
-
-                  {navbarItems.map((item, index) => (
-                    <li
-                      key={index}
-                      onClick={() => setOpen(false)}
-                      className={`cursor-pointer px-3 py-1 rounded transition-colors duration-200 ${isActive(item?.url)
-                        ? "bg-gray-200 text-primary font-semibold"
-                        : "hover:bg-gray-100"
-                        }`}
-                    >
-                      <Link href={item?.url}>{item?.title}</Link>
-                    </li>
-                  ))}
-
-                  {/* Sign Up / Log In and Log Out Button */}
-                  <div className="py-6 flex items-center justify-center">
-                    {!mounted || !role ? (
-                      <div className="flex items-center justify-center gap-1 border-2 border-brandClr2 text-brandClr1 font-semibold py-1 px-4 rounded-full customShadow4 ">
-                        <Link href="/signup" className="text-sm">
-                          Sign Up
+                  <ul className="flex flex-col mt-6 gap-2 font-medium text-gray-700 px-2">
+                    {user && (
+                      <li
+                        onClick={() => setOpen(false)}
+                        className="cursor-pointer hover:bg-gray-100 py-2 rounded"
+                      >
+                        <Link href="/profile" className="flex gap-2 items-center">
+                          <span className="w-12 h-12 block rounded-full overflow-hidden border-2 border-primary">
+                            <Image
+                              src={user ? formatUrl(user?.profile) : profileImg}
+                              alt="User Profile"
+                              width={100}
+                              height={100}
+                              className="object-cover h-12 w-12"
+                            />
+                          </span>
+                          <span className="flex flex-col text-gray-600 text-sm">
+                            {user?.name}
+                          </span>
                         </Link>
-                        <span className="">/</span>
-                        <Link href="/login" className="text-sm">
-                          Log In
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center gap-1 border-2 border-brandClr2 text-brandClr1 font-semibold py-1 px-4 rounded-full customShadow4 ">
-                        <button
-                          onClick={() => hadleRedirect("/login")}
-                          className="text-sm "
-                        >
-                          Log out
-                        </button>
-                      </div>
+                      </li>
                     )}
-                  </div>
-                </ul>
-              </SheetContent>
-            </Sheet>
+
+                    {navbarItems.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={() => setOpen(false)}
+                        className={`cursor-pointer px-3 py-1 rounded transition-colors duration-200 ${isActive(item?.url)
+                          ? "bg-gray-200 text-primary font-semibold"
+                          : "hover:bg-gray-100"
+                          }`}
+                      >
+                        <Link href={item?.url}>{item?.title}</Link>
+                      </li>
+                    ))}
+
+                    {/* Sign Up / Log In and Log Out Button */}
+                    <div className="py-6 flex items-center justify-center">
+                      {!role ? (
+                        <div className="flex items-center justify-center gap-1 border-2 border-brandClr2 text-brandClr1 font-semibold py-1 px-4 rounded-full customShadow4 ">
+                          <Link href="/signup" className="text-sm">
+                            Sign Up
+                          </Link>
+                          <span className="">/</span>
+                          <Link href="/login" className="text-sm">
+                            Log In
+                          </Link>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center gap-1 border-2 border-brandClr2 text-brandClr1 font-semibold py-1 px-4 rounded-full customShadow4 ">
+                          <button
+                            onClick={() => hadleRedirect("/login")}
+                            className="text-sm "
+                          >
+                            Log out
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </ul>
+                </SheetContent>
+              </Sheet>
+            )}
           </div>
         </div>
       </div>

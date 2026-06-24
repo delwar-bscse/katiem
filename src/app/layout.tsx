@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scrollbar-hide" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.variable} ${geistMono.variable} antialiased font-sans`}
         suppressHydrationWarning
       >
 
