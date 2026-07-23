@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { getUserRoleEmployer, getUserRoleWorker } from '@/utils/getUserRoleClient';
 import { toast } from 'sonner';
 import { CustomModal } from '../modal/CustomModal';
+import TakeReview from './TakeReview';
 import Link from 'next/link';
 import { formatUrl } from '@/utils/formatUrl';
 import dayjs from 'dayjs';
@@ -105,7 +106,12 @@ const JobDetailsTop = ({ jobDetails }: { jobDetails: any }) => {
             {!getUserRoleEmployer() && (jobDetails.isApplied ? <div>
               {jobDetails.applicationStatus === APPLICATION_STATUS.APPROVED ? <div className='flex gap-4 items-center'>
                 <Link href={`/inbox?chat_id=${jobDetails?.chatId}`} className='border-2 border-brandClr2 bg-brandClr2 text-gray-800 font-semibold py-2 px-8 rounded-sm hover:bg-brandClr2/90 transition-colors duration-300'>Contact Now</Link>
-                <button className='border-2 border-blue-600 text-blue-600 font-semibold py-2 px-8 rounded-sm hover:border-blue-700 transition-colors duration-300'>Feed Back</button>
+                <CustomModal
+                  title="Feedback"
+                  trigger={<button className='border-2 border-blue-600 text-blue-600 font-semibold py-2 px-8 rounded-sm hover:border-blue-700 transition-colors duration-300 cursor-pointer'>Feed Back</button>}
+                >
+                  <TakeReview id={jobDetails?.createdBy?._id} />
+                </CustomModal>
               </div> : <div>
                 <p className='text-gray-500'>Status : Your application status is {jobDetails.applicationStatus}</p>
               </div>}

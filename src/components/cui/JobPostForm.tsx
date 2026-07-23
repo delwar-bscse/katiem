@@ -136,7 +136,7 @@ const JobPostForm = () => {
     // console.log({data})
 
     const payload = {
-      title: "Dummy Job",
+      title: data.companyName,
       companyName: data.companyName,
       category: data.category,
       subCategory: data.subCategory,

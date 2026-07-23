@@ -120,7 +120,7 @@ const InboxSidebar = ({
                       }`}
                   >
                     {item?.latestMessage?.createdAt
-                      ? dayjs(item.latestMessage.createdAt).format("h:mm A")
+                      ? dayjs(item.latestMessage.createdAt).format("MMM D, h:mm A")
                       : ""}
                   </span>
                 </div>

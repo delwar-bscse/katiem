@@ -39,7 +39,7 @@ const Jobs = async ({ searchParams }: { searchParams: { [key: string]: string } 
     ...(longitude && latitude ? { longitude, latitude } : {}),
   });
 
-  const jobUrl = `/job?${params.toString()}`;
+  const jobUrl = `/job?isExpired=false?${params.toString()}`;
   //console.log("Url : ", `/job?${params.toString()}`)
   const res = await myFetch(jobUrl, { method: "GET" });
 

@@ -60,7 +60,7 @@ const OfferJobList = () => {
               <Link href={`/inbox?chat_id=${item?.chatId}`} className='w-25 bg-yellow-500 text-white hover:bg-yellow-600 transition-colors duration-200 cursor-pointer text-sm font-semibold px-3 py-2 rounded-md text-center'>Message</Link>
             </div>}
           {item.status === BOOKING_STATUS.PENDING && <div className='flex items-center flex-col gap-4'>
-            <button onClick={() => handleApproveDecline(item?._id, BOOKING_STATUS.APPROVED)} className='w-25 bg-yellow-500 text-white hover:bg-yellow-600 transition-colors duration-200 cursor-pointer text-sm font-semibold px-3 py-2 rounded-md'>Approved</button>
+            <button onClick={() => handleApproveDecline(item?._id, BOOKING_STATUS.APPROVED)} className='w-25 bg-yellow-500 text-white hover:bg-yellow-600 transition-colors duration-200 cursor-pointer text-sm font-semibold px-3 py-2 rounded-md'>Approve</button>
             <button onClick={() => handleApproveDecline(item?._id, BOOKING_STATUS.DECLINED)} className='w-25 border border-red-500 text-red-500 text-sm font-semibold px-3 py-2 rounded-md cursor-pointer transition-colors hover:border-red-600 hover:text-red-600 hover:transition-colors duration-200'>Decline</button>
           </div>}
           {item.status === BOOKING_STATUS.DECLINED &&

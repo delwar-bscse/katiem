@@ -77,10 +77,10 @@ const MessageList = ({
                 )}
 
                 <div
-                  className={`relative p-3.5 px-5 rounded-2xl shadow-sm break-words ${
+                  className={`relative p-3.5 px-5 rounded-3xl break-words ${
                     isMe
-                      ? "bg-primary text-white rounded-br-none"
-                      : "bg-white text-gray-800 border border-gray-100 rounded-bl-none"
+                      ? "bg-gradient-to-br from-primary to-primary/90 text-white rounded-br-sm shadow-md shadow-primary/20"
+                      : "bg-white text-gray-800 border border-gray-100 rounded-bl-sm shadow-md shadow-gray-100/50"
                   }`}
                 >
                   {/* Images Attachment */}
@@ -104,11 +104,11 @@ const MessageList = ({
                   </p>
 
                   <span
-                    className={`text-[10px] block mt-1.5 text-right font-medium opacity-70 ${
-                      isMe ? "text-white/80" : "text-gray-400"
+                    className={`text-[10px] block mt-1.5 text-right font-medium opacity-80 ${
+                      isMe ? "text-white/90" : "text-gray-500"
                     }`}
                   >
-                    {dayjs(item?.createdAt).format("h:mm A")}
+                    {dayjs(item?.createdAt).format("MMM D, h:mm A")}
                   </span>
                 </div>
               </div>
