@@ -170,6 +170,33 @@ export default function Notifications() {
     }
   };
 
+  const handleNotificationClick = async (item: Notification) => {
+    if (item.isRead) return;
+
+    // Optimistic update
+    setNotifications((prev) =>
+      prev.map((n) => (n._id === item._id ? { ...n, isRead: true } : n))
+    );
+
+    try {
+      const res = await myFetch(`/notifications/${item._id}`, {
+        method: "GET",
+      });
+      if (!res.success) {
+        // Revert on failure
+        setNotifications((prev) =>
+          prev.map((n) => (n._id === item._id ? { ...n, isRead: false } : n))
+        );
+      }
+    } catch (error) {
+      console.error("Failed to mark notification as read:", error);
+      // Revert on failure
+      setNotifications((prev) =>
+        prev.map((n) => (n._id === item._id ? { ...n, isRead: false } : n))
+      );
+    }
+  };
+
   console.log("sbsabsadbadsb", notifications)
 
   if (isLoading) {
@@ -304,7 +331,8 @@ export default function Notifications() {
             return (
               <div
                 key={item._id}
-                className={`group relative flex items-start gap-4 p-4 border rounded-xl transition-all duration-300 ${
+                onClick={() => handleNotificationClick(item)}
+                className={`group relative flex items-start gap-4 p-4 border rounded-xl transition-all duration-300 cursor-pointer ${
                   !item.isRead
                     ? "bg-brandClr1/[0.02] border-brandClr1/15 hover:border-brandClr1/30 hover:bg-brandClr1/[0.04]"
                     : "bg-white border-gray-150/75 hover:border-gray-300 hover:shadow-xs"
