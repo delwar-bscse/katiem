@@ -74,7 +74,7 @@ const ContactUsSection = () => {
           <span className="text-brandClr1 flex items-center justify-center customShadow w-10 h-10 rounded-full">
             <TfiEmail />
           </span>
-          <span className="text-gray-700">admin@example.com</span>
+          <span className="text-gray-700">admin@instantlabour.co.uk</span>
         </p>
       </div>
       {/* ---------------------------- Sign Up Form ---------------------------- */}

@@ -107,7 +107,7 @@ const Navbar = ({ userData }: { userData: any }) => {
               <MdOutlineNotificationsNone className="size-6 md:size-7 text-gray-600 hover:text-gray-800 cursor-pointer" />
               {unreadCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center text-[10px] px-1">
-                  {unreadCount || 4}
+                  {unreadCount}
                 </span>
               )}
             </Link>

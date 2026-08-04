@@ -63,7 +63,15 @@ export default function Notifications() {
       try {
         const res = await myFetch("/notifications", { method: "GET" });
         if (res.success) {
-          setNotifications(res.data);
+          const hasUnread = res.data.some((n: any) => !n.isRead);
+          if (hasUnread) {
+            // Auto mark all as read in backend
+            myFetch("/notifications/all", { method: "GET" }).catch(console.error);
+            // Update local state so they appear as read
+            setNotifications(res.data.map((n: any) => ({ ...n, isRead: true })));
+          } else {
+            setNotifications(res.data);
+          }
         }
       } catch (error) {
         console.error("Failed to fetch notifications:", error);

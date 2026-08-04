@@ -29,7 +29,7 @@ export const NotificationProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [unreadCount, setUnreadCount] = useState(1);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [userId, setUserId] = useState<string | null>(null);
   const socketRef = useRef<Socket | null>(null);
 
@@ -47,6 +47,23 @@ export const NotificationProvider = ({
     };
     getProfile();
   }, []);
+
+  // Fetch initial notifications count
+  useEffect(() => {
+    if (!userId) return;
+    const fetchNotifications = async () => {
+      try {
+        const res = await myFetch("/notifications", { method: "GET" });
+        if (res.success) {
+          const unread = res.data.filter((n: any) => !n.isRead).length;
+          setUnreadCount(unread);
+        }
+      } catch (err) {
+        console.error("Failed to fetch notifications:", err);
+      }
+    };
+    fetchNotifications();
+  }, [userId]);
 
   // 2. Socket Connection
   useEffect(() => {
