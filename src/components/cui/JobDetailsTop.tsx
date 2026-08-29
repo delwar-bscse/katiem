@@ -20,8 +20,20 @@ import { myFetch } from '@/utils/myFetch';
 import { APPLICATION_STATUS } from '@/types/jobTypes';
 import { BsExclamationCircle } from 'react-icons/bs';
 
-const JobDetailsTop = ({ jobDetails }: { jobDetails: any }) => {
+interface JobDetailsTopProps {
+  jobDetails: any;
+  hideApplyButton?: boolean;
+}
+
+const JobDetailsTop = ({ jobDetails, hideApplyButton = false }: JobDetailsTopProps) => {
   const router = useRouter();
+  const [mounted, setMounted] = React.useState(false);
+  const [isEmployer, setIsEmployer] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+    setIsEmployer(getUserRoleEmployer());
+  }, []);
 
   console.log("Job details Top: ", jobDetails);
 
@@ -103,7 +115,7 @@ const JobDetailsTop = ({ jobDetails }: { jobDetails: any }) => {
 
 
             {/* -------------------Apply Now, Contact & Review Button ------------------- */}
-            {!getUserRoleEmployer() && (jobDetails.isApplied ? <div>
+            {!hideApplyButton && mounted && !isEmployer && (jobDetails.isApplied ? <div>
               {jobDetails.applicationStatus === APPLICATION_STATUS.APPROVED ? <div className='flex gap-4 items-center'>
                 <Link href={`/inbox?chat_id=${jobDetails?.chatId}`} className='border-2 border-brandClr2 bg-brandClr2 text-gray-800 font-semibold py-2 px-8 rounded-sm hover:bg-brandClr2/90 transition-colors duration-300'>Contact Now</Link>
                 <CustomModal

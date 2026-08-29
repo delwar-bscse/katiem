@@ -67,7 +67,7 @@ const EmployeeProfile = () => {
 
   const fetchProfile = async () => {
     const res = await myFetch("/user/profile");
-    //console.log("Get User Data : ", res);
+    // console.log("Get User Data : ", res);
 
     if (res.success) {
       setUserProfile(res?.data);
@@ -78,12 +78,12 @@ const EmployeeProfile = () => {
     fetchProfile();
   }, []);
 
-    const handleLogout = () => {
-      deleteCookie('role');
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
-      router.push("/")
-    }
+  const handleLogout = () => {
+    deleteCookie('role');
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
+    router.push("/")
+  }
 
   return (
     <div>
@@ -110,14 +110,13 @@ const EmployeeProfile = () => {
         <div className='w-full md:w-1/4 bg-white rounded-lg border border-gray-100 p-4 shadow-sm md:sticky md:top-24'>
           <ul className='flex flex-col gap-2'>
             {profileSidebar?.map((item) => (
-              <li 
-                onClick={() => setStep(item.id)} 
-                key={item.id} 
-                className={`flex items-center gap-2.5 py-2.5 px-4 cursor-pointer rounded-md transition-all duration-200 ${
-                  item.id === step 
-                    ? "bg-[#FFECAC] text-gray-900 font-semibold shadow-sm" 
-                    : "bg-white hover:bg-[#FFECAC]/30 text-gray-600"
-                }`}
+              <li
+                onClick={() => setStep(item.id)}
+                key={item.id}
+                className={`flex items-center gap-2.5 py-2.5 px-4 cursor-pointer rounded-md transition-all duration-200 ${item.id === step
+                  ? "bg-[#FFECAC] text-gray-900 font-semibold shadow-sm"
+                  : "bg-white hover:bg-[#FFECAC]/30 text-gray-600"
+                  }`}
               >
                 <span className='text-xl'>
                   {item.icon}
@@ -125,8 +124,8 @@ const EmployeeProfile = () => {
                 <span className='text-base font-semibold'>{item.title}</span>
               </li>
             ))}
-            <li 
-              onClick={handleLogout} 
+            <li
+              onClick={handleLogout}
               className={`flex items-center gap-2.5 py-2.5 px-4 cursor-pointer rounded-md transition-all duration-200 bg-white hover:bg-red-50 text-red-600 mt-4 border-t border-gray-100 pt-4`}
             >
               <span>

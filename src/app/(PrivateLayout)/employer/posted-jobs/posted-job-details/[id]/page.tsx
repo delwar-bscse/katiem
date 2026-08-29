@@ -6,6 +6,8 @@ import { APPLICATION_STATUS } from '@/types/jobTypes'
 import { myFetch } from '@/utils/myFetch'
 import Link from 'next/link'
 import React from 'react'
+import BoostJobButton from '@/components/cui/BoostJobButton'
+
 
 const PostedJobDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
@@ -18,7 +20,7 @@ const PostedJobDetails = async ({ params }: { params: { id: string } }) => {
     <div className='maxWidth pt-4 pb-20'>
 
       {/* --------------------- Job Header --------------------- */}
-      <JobDetailsTop jobDetails={jobDetails} />
+      <JobDetailsTop jobDetails={jobDetails} hideApplyButton />
 
       {/* ------------ Action Buttons - Edit Post, Applied Workers, Approved Workers ------------ */}
       <div className='flex gap-2 py-4 md:py-6 items-center flex-wrap'>
@@ -32,7 +34,7 @@ const PostedJobDetails = async ({ params }: { params: { id: string } }) => {
           <Link href={`/employer/posted-jobs/worker-list?type=${APPLICATION_STATUS.APPROVED}&jobId=${jobDetails._id}`} className='w-full border py-2 px-3 rounded-sm border-green-500 hover:bg-green-500 hover:text-white transition-colors duration-300'>Approved Workers</Link>
         </div>
         <div>
-          <button className='w-full border py-2 px-6 cursor-pointer rounded-sm bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300'>Boost</button>
+          <BoostJobButton jobId={jobDetails._id} />
         </div>
       </div>
 

@@ -9,7 +9,7 @@ import { myFetch } from '@/utils/myFetch';
 import BookMessageButtons from '@/components/actions/BookMessageButtons';
 
 const SingleWorker = async ({ params }: { params: { id: string } }) => {
-  const id = await params?.id
+  const { id } = await params;
 
   const res = await myFetch(`/user/workers/${id}`);
   

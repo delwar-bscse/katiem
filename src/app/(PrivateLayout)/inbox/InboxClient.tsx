@@ -33,7 +33,12 @@ const InboxClient = ({ chatList, singleChat }: { chatList: any, singleChat?: any
   const SOCKET_URL = process.env.NEXT_PUBLIC_IMAGE_URL
   useEffect(()=>{
     if(chatList?.data){
-      setDynamicChatList(chatList?.data);
+      const sortedList = [...chatList.data].sort((a, b) => {
+        const dateA = new Date(a?.latestMessage?.createdAt || a?.createdAt || 0).getTime();
+        const dateB = new Date(b?.latestMessage?.createdAt || b?.createdAt || 0).getTime();
+        return dateB - dateA; // Sort in descending order (newest first)
+      });
+      setDynamicChatList(sortedList);
     }else{
       setDynamicChatList([]);
     }
